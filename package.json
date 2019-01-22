@@ -1,0 +1,25 @@
+{
+  "name": "soccer-ethiopia-api",
+  "version": "0.1.0",
+  "description": "API to fetch details about Ethiopian soccer premier league",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "Soccer",
+    "API",
+    "Ethiopia",
+    "Football",
+    "Premier",
+    "League",
+    "Ethiopian",
+    "Premier",
+    "League"
+  ],
+  "author": "Brook Mezgebu",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "cheerio": "^1.0.0-rc.2"
+  }
+}
