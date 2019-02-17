@@ -16,13 +16,13 @@ npm i soccer-ethiopia-api
 
 * Get the latest standing data as json
 ```javascript
-const team_standing = require('./team_standing');
+const team_standing = require('soccer-ethiopia-api/team_standing');
 team_standing.getTeamStandingDataJson().then(data => console.log("OBJ" , data));
 ```
 
 * Get the latest standing data as an array
 ```javascript
-const team_standing = require('./team_standing');
+const team_standing = require('soccer-ethiopia-api/team_standing');
 team_standing.getTeamStandingData().then(data => console.log("OBJ" , data));
 ```
 
