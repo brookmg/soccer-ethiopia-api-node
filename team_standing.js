@@ -32,7 +32,7 @@ function getLatestClubStandingData(response) {
     let tables = $('.sp-league-table');
     let rows = tables.find('tr');
 
-    for (let i = 0; i < rows.length/2; i++) {
+    for (let i = 0; i < rows.length; i++) {
         let thisRow = rows.toArray()[i];
         if (thisRow.children[1].children[0].children) {
             Object.assign(singleRow,
