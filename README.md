@@ -10,14 +10,14 @@
 
 * Get the latest standing data as json
 ```javascript
-	const team_standing = require('./team_standing');
-	team_standing.getTeamStandingDataJson().then(data => console.log("OBJ" , data));
+const team_standing = require('./team_standing');
+team_standing.getTeamStandingDataJson().then(data => console.log("OBJ" , data));
 ```
 
 * Get the latest standing data as an array
 ```javascript
-	const team_standing = require('./team_standing');
-	team_standing.getTeamStandingData().then(data => console.log("OBJ" , data));
+const team_standing = require('./team_standing');
+team_standing.getTeamStandingData().then(data => console.log("OBJ" , data));
 ```
 
 ## Features in this lib:
