@@ -4,6 +4,7 @@
   "description": "API to fetch details about Ethiopian soccer premier league",
   "main": "index.js",
   "scripts": {
+    "run": "node index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
