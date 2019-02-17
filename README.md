@@ -3,10 +3,14 @@
 	<h1 align="center"> Soccer Ethiopia API Node</h1>
 	<h4 align="center"> This is an nodejs api that serve the latest Ethiopian premier league standing data </h4>
 </p>
+[![npm package](https://nodei.co/npm/soccer-ethiopia-api.png?downloads=true&downloadRank=true&stars=true)](https://nodei.co/npm/soccer-ethiopia-api/)
 
 #### The data is fetched from [Soccer Ethiopia](http://soccerethiopia.net). And this is an unoffical api.
 
-#### We are currently in development, you won't find this in npm 
+## Installation
+```batch
+npm i soccer-ethiopia-api
+```
 
 * Get the latest standing data as json
 ```javascript
