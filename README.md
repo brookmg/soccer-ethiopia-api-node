@@ -1,7 +1,7 @@
 <p align="center">
 	<img src="https://github.com/brookmg/Soccer-Ethiopia-API/blob/master/soccer_ethiopia_api.png?raw=true" alt="Soccer Ethiopia" /><br>
 	<h1 align="center"> Soccer Ethiopia API Node</h1>
-	<h4 align="center"> This is an nodejs api that serve the latest Ethiopian premier league standing data </h4>
+	<h4 align="center"> This is a NodeJs api that serve the latest Ethiopian premier league standing data </h4>
 </p>
 
 #
