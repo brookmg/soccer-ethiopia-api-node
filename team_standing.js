@@ -34,7 +34,7 @@ function getLatestClubStandingData(response) {
 
     for (let i = 0; i < rows.length; i++) {
         let thisRow = rows.toArray()[i];
-        if (thisRow.children[1].children[0].children) {
+        if (thisRow.children.length > 5 && thisRow.children[1].children[0].children) {
             Object.assign(singleRow,
                 {
                     team_name: thisRow.children[1].children[0].children[1].data,

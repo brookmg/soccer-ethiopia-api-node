@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "run": "node index.js",
+    "run_debug": "node %NODE_DEBUG_OPTION% index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
