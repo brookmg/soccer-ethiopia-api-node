@@ -27,19 +27,11 @@ exports.getAllLeagueScheduleJSON = async function () {
 };
 
 /**
- * A function to process the data from the website. The returned array of object will be similar to
- * [{
- *      team_one: {name: "ሲዳማ ቡና",score: 0},
- *      team_two: {name: "ፋሲል ከነማ",score: 0},
- *      game_time: "09:00",
- *      game_status: 0,
- *      week: 1,
- *      game_date: "ቅዳሜ ጥቅምት 17 ቀን 2011",
- * }]
- * @param response from the website
- * @return {Array} - of objects containing detail about each game
+ * Returns all the content found in tables with class '.tablepress-id-006', repeated or not
+ * @param response
+ * @return {Array}
  */
-function getScheduleData (response) {
+function getBaseScheduleData (response) {
     let $ = cheerio.load(response);
     let returnable = [];
     let tables = $(".tablepress-id-006");
@@ -100,6 +92,72 @@ function getScheduleData (response) {
 }
 
 /**
+ * A function to process the data from the website. The returned array of object will be similar to
+ * [{
+ *      team_one: {name: "ሲዳማ ቡና",score: 0},
+ *      team_two: {name: "ፋሲል ከነማ",score: 0},
+ *      game_time: "09:00",
+ *      game_status: 0,
+ *      week: 1,
+ *      game_date: "ቅዳሜ ጥቅምት 17 ቀን 2011",
+ * }]
+ * @param response from the website
+ * @return {Array} - of objects containing detail about each game
+ */
+function getScheduleData (response) {
+    return getBaseScheduleData(response).filter(function (item, i) {
+        return (item.week !== 16);  //the last table is repeated
+    });
+}
+
+/**
+ * Entry point for league_schedule api (this week's schedule)
+ * @return {Array}
+ */
+exports.getThisWeekLeagueSchedule = async () => {
+    if (testing) {
+        return new Promise(resolve => resolve(getThisWeekScheduleData(readScheduleFromFile())));
+    } else {
+        return readScheduleFromWeb().then(response => getThisWeekScheduleData(response));
+    }
+};
+
+/**
+ * Entry point for league_schedule api (this week's schedule)
+ * @return {string} - json
+ */
+exports.getThisWeekLeagueScheduleJSON = async function () {
+    return JSON.stringify(await this.getThisWeekLeagueSchedule());
+};
+
+/**
+ * A function to process the data from the website. The returned array of object will be similar to
+ * [{
+ *      team_one: {name: "ሲዳማ ቡና",score: 0},
+ *      team_two: {name: "ፋሲል ከነማ",score: 0},
+ *      game_time: "09:00",
+ *      game_status: 0,
+ *      week: 1,
+ *      game_date: "ቅዳሜ ጥቅምት 17 ቀን 2011",
+ * }]
+ * @param response from the website
+ * @return {Array} - of objects containing detail about each game
+ */
+function getThisWeekScheduleData(response) {
+    let mainList = getBaseScheduleData(response);
+    let thisWeek = mainList.filter(function (item) { return item.week === 16; });
+
+    for (let i = 0; i < mainList.length; i++) {
+        if (mainList[i].team_one.name === thisWeek[0].team_one.name && mainList[i].team_two.name === thisWeek[0].team_two.name) {
+            thisWeek.forEach(item => item.week = mainList[i].week); //change the week property for all the items in thisWeek array
+            break;
+        }
+    }
+
+    return thisWeek;
+}
+
+/**
  * A function to get status of the game given the string between the names of the teams
  * @param inBetweenData - string located between the two teams
  * @return {number} - numbers located in GameStatus
@@ -118,7 +176,7 @@ function getGameStatus (inBetweenData) {
 function readScheduleFromFile () {
     const fx = require('fs');
     try {
-        return fx.readFileSync('./dummy_schedule.html', 'utf-8');
+        return fx.readFileSync('./league_dummy.html', 'utf-8');
     } catch (e) {
         console.error("file_" , e);
         return ""
