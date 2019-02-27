@@ -14,34 +14,40 @@
 npm i soccer-ethiopia-api
 ```
 
-* Get the latest standing data as json
+* Get the latest standing data
 ```javascript
+// Get the latest standing data as json
 const soccer_et = require('soccer-ethiopia-api');
-soccer_et.getTeamStandingJson.then(data => console.log("OBJ" , data));
+soccer_et.getTeamStandingJson().then(data => console.log("OBJ" , data));
+
+// Get the latest standing data as an array
+const soccer_et = require('soccer-ethiopia-api');
+soccer_et.getTeamStandingData().then(data => console.log("OBJ" , data));
 ```
 
-* Get the latest standing data as an array
+* Get the league schedule
 ```javascript
+// Get the league schedule as json (All of it)
 const soccer_et = require('soccer-ethiopia-api');
-soccer_et.getTeamStandingData.then(data => console.log("OBJ" , data));
-```
+soccer_et.getAllLeagueScheduleJSON().then(data => console.log("OBJ" , data));
 
-* Get the league schedule as json (All of it)
-```javascript
+// Get the league schedule as an array (All of it)
 const soccer_et = require('soccer-ethiopia-api');
-soccer_et.getAllLeagueScheduleJSON.then(data => console.log("OBJ" , data));
-```
+soccer_et.getAllLeagueSchedule().then(data => console.log("OBJ" , data));
 
-* Get the league schedule as an array (All of it)
-```javascript
+// Get this week's league schedule as json
 const soccer_et = require('soccer-ethiopia-api');
-soccer_et.getAllLeagueSchedule.then(data => console.log("OBJ" , data));
+soccer_et.getThisWeekLeagueScheduleJSON().then(data => console.log("OBJ" , data));
+
+// Get this week's league schedule as an array
+const soccer_et = require('soccer-ethiopia-api');
+soccer_et.getThisWeekLeagueSchedule().then(data => console.log("OBJ" , data));
 ```
 
 ## Features in this lib:
 - [x] Latest teams' standing data
 - [x] League schedule
-- [ ] This week's league schedule
+- [x] This week's league schedule
 - [ ] Team details
 - [ ] Player details
 - [ ] Top players list
