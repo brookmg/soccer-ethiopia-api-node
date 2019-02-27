@@ -16,32 +16,20 @@ npm i soccer-ethiopia-api
 
 * Get the latest standing data
 ```javascript
-// Get the latest standing data as json
-const soccer_et = require('soccer-ethiopia-api');
-soccer_et.getTeamStandingJson().then(data => console.log("OBJ" , data));
+const soccer_et = require('soccer-ethiopia-api'); //require soccer-et module
 
-// Get the latest standing data as an array
-const soccer_et = require('soccer-ethiopia-api');
-soccer_et.getTeamStandingData().then(data => console.log("OBJ" , data));
+soccer_et.getTeamStandingJson().then(data => console.log("OBJ" , data)); // Get the latest standing data as json
+soccer_et.getTeamStandingData().then(data => console.log("OBJ" , data)); // Get the latest standing data as an array
 ```
 
 * Get the league schedule
 ```javascript
-// Get the league schedule as json (All of it)
-const soccer_et = require('soccer-ethiopia-api');
-soccer_et.getAllLeagueScheduleJSON().then(data => console.log("OBJ" , data));
+const soccer_et = require('soccer-ethiopia-api');   //require soccer-et module
 
-// Get the league schedule as an array (All of it)
-const soccer_et = require('soccer-ethiopia-api');
-soccer_et.getAllLeagueSchedule().then(data => console.log("OBJ" , data));
-
-// Get this week's league schedule as json
-const soccer_et = require('soccer-ethiopia-api');
-soccer_et.getThisWeekLeagueScheduleJSON().then(data => console.log("OBJ" , data));
-
-// Get this week's league schedule as an array
-const soccer_et = require('soccer-ethiopia-api');
-soccer_et.getThisWeekLeagueSchedule().then(data => console.log("OBJ" , data));
+soccer_et.getAllLeagueScheduleJSON().then(data => console.log("OBJ" , data)); // Get the league schedule as json (All of it)
+soccer_et.getAllLeagueSchedule().then(data => console.log("OBJ" , data)); // Get the league schedule as an array (All of it)
+soccer_et.getThisWeekLeagueScheduleJSON().then(data => console.log("OBJ" , data)); // Get this week's league schedule as json
+soccer_et.getThisWeekLeagueSchedule().then(data => console.log("OBJ" , data)); // Get this week's league schedule as an array
 ```
 
 ## Features in this lib:
