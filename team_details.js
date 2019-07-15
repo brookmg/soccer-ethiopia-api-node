@@ -344,5 +344,11 @@ exports.getTeamItemFromName = async function(name) {
     return null;
 }
 
+exports.getTeamItemFromNameJSON = async function(name) {
+    return JSON.stringify(await this.getTeamItemFromName(name));
+}
 
+exports.getTeamItemFromIDJSON = async function(id) {
+    return JSON.stringify(await this.getTeamItemFromId(id));
+}
 

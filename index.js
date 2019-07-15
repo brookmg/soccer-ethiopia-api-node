@@ -11,3 +11,5 @@ exports.getThisWeekLeagueSchedule = () => league_schedule.getThisWeekLeagueSched
 exports.getThisWeekLeagueScheduleJSON = () => league_schedule.getThisWeekLeagueScheduleJSON();
 exports.getTeamDetail = (teamName) => team_details.getTeamItemFromName(teamName);
 exports.getTeamDetailUsingId = (id) => team_details.getTeamItemFromId(id);
+exports.getTeamDetailJSON = (teamName) => team_details.getTeamItemFromNameJSON(teamName);
+exports.getTeamDetailUsingIdJSON = (id) => team_details.getTeamItemFromIDJSON(id);
