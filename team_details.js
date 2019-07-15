@@ -266,12 +266,73 @@ function replaceCharFromString(mainString, characterToReplace) {
     return mainString.split(characterToReplace).join('');
 }
 
+/**
+ * Entry point for team_details api feature
+ * given a id of a team (ex: 0), will return the detail of that team
+ * example output:
+ * <pre>
+ *   { 
+ *       id: 0,
+ *       teamLink: 'http://www.soccerethiopia.net/football/team/ethiopia-bunna',
+ *       teamName: 'ኢትዮጵያ ቡና',
+ *       teamLogo: 'http://www.soccerethiopia.net/wp-content/uploads/2016/02/Bunna-128x128.png',
+ *       teamStartedOn: 1968,
+ *       teamCapital: 'አዲስ አበባ',
+ *       teamFullName: 'ኢትዮጵያ ቡና ስፖርት ክለብ',
+ *       previousNames: [ 'ንጋት ኮከብ', 'ቡና ገበያ' ],
+ *       teamStadium: 'አዲስ አበባ ስታድየም',
+ *       teamPresident: '፻ አለቃ ፈቃደ ማሞ',
+ *       teamVicePresident: '–',
+ *       teamManager: 'በያን ሁሴን',
+ *       teamCoach: 'ዲዲዬ ጎሜስ',
+ *       teamViceCoach: 'ገብረኪዳን ነጋሽ',
+ *       teamTechniqueDirector: '–',
+ *       teamGoalKeeper: 'ጸጋዘዓብ አስገዶም',
+ *       teamAlpha: 'ዘሪሁን ግርማ',
+ *       teamNurse: 'ሰለሞን ኃይለማርያም' 
+ *   }
+ * </pre> 
+ * @param name - name of the team
+ * @return {Object}
+ * @api Public
+ */
+
 exports.getTeamItemFromId = async function(id) {
     return getTeamDetailFromWeb(teams[id])
         .then(data => processTeamDetailFromResponse(data))
         .catch(err => console.log(err));
 }
 
+/**
+ * Entry point for team_details api feature
+ * given a name of a team (ex: 'ኢትዮጵያ ቡና'), will return the detail of that team
+ * example output:
+ * <pre>
+ *   { 
+ *       id: 0,
+ *       teamLink: 'http://www.soccerethiopia.net/football/team/ethiopia-bunna',
+ *       teamName: 'ኢትዮጵያ ቡና',
+ *       teamLogo: 'http://www.soccerethiopia.net/wp-content/uploads/2016/02/Bunna-128x128.png',
+ *       teamStartedOn: 1968,
+ *       teamCapital: 'አዲስ አበባ',
+ *       teamFullName: 'ኢትዮጵያ ቡና ስፖርት ክለብ',
+ *       previousNames: [ 'ንጋት ኮከብ', 'ቡና ገበያ' ],
+ *       teamStadium: 'አዲስ አበባ ስታድየም',
+ *       teamPresident: '፻ አለቃ ፈቃደ ማሞ',
+ *       teamVicePresident: '–',
+ *       teamManager: 'በያን ሁሴን',
+ *       teamCoach: 'ዲዲዬ ጎሜስ',
+ *       teamViceCoach: 'ገብረኪዳን ነጋሽ',
+ *       teamTechniqueDirector: '–',
+ *       teamGoalKeeper: 'ጸጋዘዓብ አስገዶም',
+ *       teamAlpha: 'ዘሪሁን ግርማ',
+ *       teamNurse: 'ሰለሞን ኃይለማርያም' 
+ *   }
+ * </pre> 
+ * @param name - name of the team
+ * @return {Object}
+ * @api Public
+ */
 exports.getTeamItemFromName = async function(name) {
     for (let i = 0; i < teams.length; i++) {
         if (teams[i].teamName.indexOf(name) != -1) {
