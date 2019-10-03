@@ -18,8 +18,8 @@ npm i soccer-ethiopia-api
 ```javascript
 const soccer_et = require('soccer-ethiopia-api'); //require soccer-et module
 
-soccer_et.getTeamStandingJson().then(data => console.log("OBJ" , data)); // Get the latest standing data as json
-soccer_et.getTeamStandingData().then(data => console.log("OBJ" , data)); // Get the latest standing data as an array
+soccer_et.getTeamStandingJSON().then(data => console.log("OBJ" , data)); // Get the latest standing data as json
+soccer_et.getTeamStanding().then(data => console.log("OBJ" , data)); // Get the latest standing data as an array
 ```
 
 * Get the league schedule
