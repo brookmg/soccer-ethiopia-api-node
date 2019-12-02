@@ -131,6 +131,30 @@ const teams = [
         teamLogo: 'http://www.soccerethiopia.net/wp-content/uploads/2016/02/Dedebit-128x128.png',
         teamStartedOn: -1,
         teamCapital: ''  
+    },
+    {
+        id: 16,
+        teamLink: 'http://www.soccerethiopia.net/football/team/%e1%88%80%e1%8b%b5%e1%8b%ab-%e1%88%86%e1%88%b3%e1%8b%95%e1%8a%93',
+        teamName: 'ሀዲያ ሆሳዕና',
+        teamLogo: 'http://www.soccerethiopia.net/wp-content/uploads/2016/11/24483-128x128.png',
+        teamStartedOn: -1,
+        teamCapital: ''
+    },
+    {
+        id: 17,
+        teamLink: 'http://www.soccerethiopia.net/football/team/sebeta',
+        teamName: 'ሰበታ ከተማ',
+        teamLogo: 'http://www.soccerethiopia.net/wp-content/uploads/2016/11/sebeta.png',
+        teamStartedOn: -1,
+        teamCapital: ''
+    },
+    {
+        id: 18,
+        teamLink: 'http://www.soccerethiopia.net/football/team/%e1%8b%88%e1%88%8d%e1%89%82%e1%8c%a4-%e1%8a%a8%e1%89%b0%e1%88%9b',
+        teamName: 'ወልቂጤ ከተማ',
+        teamLogo: 'http://www.soccerethiopia.net/wp-content/uploads/2016/11/sebeta.png',
+        teamStartedOn: -1,
+        teamCapital: ''
     }
 ];
 
@@ -234,12 +258,12 @@ function extractDataFromTableData(tableData, incompleteTeamItem) {
 
 function processTeamDetailFromResponse(response, incompleteTeamItem) {
     let $ = cheerio.load(response);
-    let possibleCandidates = $('.tablepress-id-006')
+    let possibleCandidates = $('.tablepress-id-006');
     let actualTable = null;
 
     for (let i = 0; i < possibleCandidates.length; i++) {
         let tempBlock = cheerio.load(possibleCandidates[i]);
-        if (cheerio.load(tempBlock('tr')[0]).text() == '\nፕሮፋይል\n') {
+        if (cheerio.load(tempBlock('tr')[0]).text() === '\nፕሮፋይል\n') {
             actualTable = cheerio.load(possibleCandidates[i]);
             break;
         }
@@ -250,7 +274,7 @@ function processTeamDetailFromResponse(response, incompleteTeamItem) {
 
         rows.toArray().forEach(row => {
             const tableData = cheerio.load(row)('td');
-            if (tableData.length == 3) {
+            if (tableData.length === 3) {
                 incompleteTeamItem = extractDataFromTableData(tableData , incompleteTeamItem);
             }
         })
@@ -261,7 +285,7 @@ function processTeamDetailFromResponse(response, incompleteTeamItem) {
     return incompleteTeamItem;
 }
 
-// FUCK JAVASCRIPT!
+
 function replaceCharFromString(mainString, characterToReplace) {
     return mainString.split(characterToReplace).join('');
 }
@@ -301,7 +325,7 @@ exports.getTeamItemFromId = async function(id) {
     return getTeamDetailFromWeb(teams[id])
         .then(data => processTeamDetailFromResponse(data))
         .catch(err => console.log(err));
-}
+};
 
 /**
  * Entry point for team_details api feature
@@ -335,20 +359,20 @@ exports.getTeamItemFromId = async function(id) {
  */
 exports.getTeamItemFromName = async function(name) {
     for (let i = 0; i < teams.length; i++) {
-        if (teams[i].teamName.indexOf(name) != -1) {
+        if (teams[i].teamName.indexOf(name) !== -1) {
             return getTeamDetailFromWeb(teams[i])
                 .then(data => processTeamDetailFromResponse(data, teams[i]))
                 .catch(err => console.log(err));
         }
     }
     return null;
-}
+};
 
 exports.getTeamItemFromNameJSON = async function(name) {
     return JSON.stringify(await this.getTeamItemFromName(name));
-}
+};
 
 exports.getTeamItemFromIDJSON = async function(id) {
     return JSON.stringify(await this.getTeamItemFromId(id));
-}
+};
 
