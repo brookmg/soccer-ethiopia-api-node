@@ -284,8 +284,7 @@ function processTeamDetailFromResponse(response, incompleteTeamItem) {
 
     return incompleteTeamItem;
 }
-
-
+  
 function replaceCharFromString(mainString, characterToReplace) {
     return mainString.split(characterToReplace).join('');
 }
@@ -359,6 +358,7 @@ exports.getTeamItemFromId = async function(id) {
  */
 exports.getTeamItemFromName = async function(name) {
     for (let i = 0; i < teams.length; i++) {
+
         if (teams[i].teamName.indexOf(name) !== -1) {
             return getTeamDetailFromWeb(teams[i])
                 .then(data => processTeamDetailFromResponse(data, teams[i]))
@@ -375,4 +375,3 @@ exports.getTeamItemFromNameJSON = async function(name) {
 exports.getTeamItemFromIDJSON = async function(id) {
     return JSON.stringify(await this.getTeamItemFromId(id));
 };
-
