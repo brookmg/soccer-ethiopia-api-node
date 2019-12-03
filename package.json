@@ -22,6 +22,7 @@
   "author": "Brook Mezgebu",
   "license": "Apache-2.0",
   "dependencies": {
+    "@types/cheerio": "^0.22.14",
     "cheerio": "^1.0.0-rc.3"
   }
 }

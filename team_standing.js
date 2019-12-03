@@ -2,7 +2,7 @@ const cheerio = require('cheerio');
 const http = require('http');
 
 const testing = false;
-const SOCCER_ETHIOPIA_CLUB_STANDING_URL = "http://www.soccerethiopia.net/football/table/2018-19-premier-league-standing";
+const SOCCER_ETHIOPIA_CLUB_STANDING_URL = "http://www.soccerethiopia.net/football/table/2012-standing";
 
 /**
  * A function to process the data from the website. The returned array of object will be similar to

@@ -18,8 +18,8 @@ npm i soccer-ethiopia-api
 ```javascript
 const soccer_et = require('soccer-ethiopia-api'); //require soccer-et module
 
-soccer_et.getTeamStandingJson().then(data => console.log("OBJ" , data)); // Get the latest standing data as json
-soccer_et.getTeamStandingData().then(data => console.log("OBJ" , data)); // Get the latest standing data as an array
+soccer_et.getTeamStandingJSON().then(data => console.log("OBJ" , data)); // Get the latest standing data as json
+soccer_et.getTeamStanding().then(data => console.log("OBJ" , data)); // Get the latest standing data as an array
 ```
 
 * Get the league schedule
@@ -32,11 +32,19 @@ soccer_et.getThisWeekLeagueScheduleJSON().then(data => console.log("OBJ" , data)
 soccer_et.getThisWeekLeagueSchedule().then(data => console.log("OBJ" , data)); // Get this week's league schedule as an array
 ```
 
+* Get full detail about a team using it's predefined id or it's name
+```javascript
+const soccer_et = require('soccer-ethiopia-api');
+
+soccer_et.getTeamDetail('ኢትዮጵያ ቡና').then(detail => console.log("OBJ" , detail)); // Get the team detail of 'ኢትዮጵያ ቡና' as an object
+soccer_et.getTeamDetailJSON('ኢትዮጵያ ቡና').then(detail => console.log("OBJ" , detail)); // Get the team detail of 'ኢትዮጵያ ቡና' as json 
+```
+
 ## Features in this lib:
 - [x] Latest teams' standing data
 - [x] League schedule
 - [x] This week's league schedule
-- [ ] Team details
+- [x] Team details
 - [ ] Player details
 - [ ] Top players list
 - [ ] News

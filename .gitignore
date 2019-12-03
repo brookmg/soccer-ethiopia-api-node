@@ -28,3 +28,5 @@ yarn-error.log*
 .idea/workspace.xml
 .idea/vcs.xml
 *.html
+.vscode
+
