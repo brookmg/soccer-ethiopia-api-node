@@ -26,10 +26,9 @@ exports.getAllLeagueScheduleJSON = async function () {
     return JSON.stringify(await this.getAllLeagueSchedule());
 };
 
-function isItScheduleRelatedTable(table, parent) {
-    var $ = cheerio.load(table);
-    var tds = $("td");
-    parent = cheerio(parent);
+function isItScheduleRelatedTable($, table, parent) {
+    var tds = $("td", table);
+    parent = tds.parent()
     var result = cheerio.load(tds[0]).text().includes("ሳምንት") &&
         (!parent.hasClass("textwidget"));
     return result;
@@ -40,63 +39,65 @@ function isItScheduleRelatedTable(table, parent) {
  * @param response
  * @return {Array}
  */
-function getBaseScheduleData (response) {
+function getBaseScheduleData (response, thisWeekOnly = false) {
     let $ = cheerio.load(response);
     let returnable = [];
     let tables = $("table");
     let i = 0;
 
-    tables.toArray().forEach(table => {
-        if (isItScheduleRelatedTable(table)) {
-            table = cheerio.load(table);
-            const rows = table('tr');
-            let currentGameDate = "";
-            rows.toArray().forEach(row => {
-                row = cheerio.load(row);
-                const tds = row('td');
-                let team_one = Object.create(null);
-                let team_two = Object.create(null);
-                let game_status = GameStatus.STATUS_NORMAL;
-                let game_time = "";
-                if (tds.length === 1) currentGameDate = tds.text();
-                else if (tds.length === 3) {
-                    const td0 = cheerio.load(tds[0]);
-                    const td1 = cheerio.load(tds[1]);
-                    const td2 = cheerio.load(tds[2]);
+    // rewrite this function with .each method in cheerio
+    tables.each( (i , e) => {
+        if (!isItScheduleRelatedTable($, e)) return;
 
-                    let t1 = {name: td0.text()};
-                    let t2 = {name: td2.text()};
-                    game_status = getGameStatus(td1.text());
+        if (thisWeekOnly && $(e).parent().get(0).attribs['class'] === 'read_div') return; 
 
-                    if (game_status === GameStatus.STATUS_NORMAL) {
-                        t1.score = 0;
-                        t2.score = 0;
-                        game_time = td1.text();
-                    } else if (game_status === GameStatus.STATUS_TOOK_PLACE) {
-                        t1.score = td1.text().split("-")[0];
-                        t2.score = td1.text().split("-")[1];
-                    } else {    //maybe if postponed
-                        game_time = td1.text();
-                    }
+        const rows = $('tr' , e);
+        let currentGameDate = "";
 
-                    team_one = t1;
-                    team_two = t2;
+        rows.each( (ir , row ) => {
+            const tds = $('td' , row);
+            let team_one = Object.create(null);
+            let team_two = Object.create(null);
+            let game_status = GameStatus.STATUS_NORMAL;
+            let game_time = "";
+            if (tds.length === 1) currentGameDate = tds.text();
+            else if (tds.length === 3) {
+                const td0 = cheerio.load(tds[0]);
+                const td1 = cheerio.load(tds[1]);
+                const td2 = cheerio.load(tds[2]);
+
+                let t1 = {name: td0.text()};
+                let t2 = {name: td2.text()};
+                game_status = getGameStatus(td1.text());
+
+                if (game_status === GameStatus.STATUS_NORMAL) {
+                    t1.score = 0;
+                    t2.score = 0;
+                    game_time = td1.text();
+                } else if (game_status === GameStatus.STATUS_TOOK_PLACE) {
+                    t1.score = td1.text().split("-")[0];
+                    t2.score = td1.text().split("-")[1];
+                } else {    //maybe if postponed
+                    game_time = td1.text();
                 }
 
-                if (!Number.isInteger(Number.parseInt(currentGameDate[0])) && team_one.name !== undefined) {
-                    let singleScheduleItem = {
-                        team_one: team_one,
-                        team_two: team_two,
-                        game_time: game_time,
-                        game_status: game_status,
-                        week: i + 1,
-                        game_date: currentGameDate
-                    };
-                    returnable.push(singleScheduleItem);
-                }
-            });
-            i++;
-        }
+                team_one = t1;
+                team_two = t2;
+            }
+
+            if (!Number.isInteger(Number.parseInt(currentGameDate[0])) && team_one.name !== undefined) {
+                let singleScheduleItem = {
+                    team_one: team_one,
+                    team_two: team_two,
+                    game_time: game_time,
+                    game_status: game_status,
+                    week: i + 1,
+                    game_date: currentGameDate
+                };
+                returnable.push(singleScheduleItem);
+            }
+        })
+
     });
 
     return returnable;
@@ -155,7 +156,7 @@ exports.getThisWeekLeagueScheduleJSON = async function () {
  * @return {Array} - of objects containing detail about each game
  */
 function getThisWeekScheduleData(response) {
-    let mainList = getBaseScheduleData(response);
+    let mainList = getBaseScheduleData(response, true);
     // clean up repeated entries
 
     mainList = mainList.filter(function (item, index, self) {
