@@ -1,6 +1,6 @@
 {
   "name": "soccer-ethiopia-api",
-  "version": "0.3.1",
+  "version": "0.3.2",
   "description": "API to fetch details about Ethiopian soccer premier league",
   "main": "index.js",
   "scripts": {
