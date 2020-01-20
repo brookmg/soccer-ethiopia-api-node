@@ -40,6 +40,14 @@ soccer_et.getTeamDetail('ኢትዮጵያ ቡና').then(detail => console.log("OB
 soccer_et.getTeamDetailJSON('ኢትዮጵያ ቡና').then(detail => console.log("OBJ" , detail)); // Get the team detail of 'ኢትዮጵያ ቡና' as json 
 ```
 
+* Get the top players in the current league
+```javascript
+const soccer_et = require('soccer-ethiopia-api');
+
+soccer_et.getTopPlayersList().then(topList => console.log("OBJ" , topList)); // Get the top players in the league currently as an array of objects
+soccer_et.getTopPlayersListJSON().then(topList => console.log("OBJ" , topList)); // Get the top players in the league currently as json
+```
+
 ## Features in this lib:
 - [x] Latest teams' standing data
 - [x] League schedule
