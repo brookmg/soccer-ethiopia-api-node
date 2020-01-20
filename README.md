@@ -46,5 +46,5 @@ soccer_et.getTeamDetailJSON('ኢትዮጵያ ቡና').then(detail => console.log
 - [x] This week's league schedule
 - [x] Team details
 - [ ] Player details
-- [ ] Top players list
+- [x] Top players list
 - [ ] News
