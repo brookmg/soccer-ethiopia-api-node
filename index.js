@@ -2,6 +2,7 @@ const team_standing = require('./team_standing');
 const league_schedule = require('./league_schedule');
 const team_details = require('./team_details')
 const top_players = require('./top_players')
+const news_fetch = require('./news_fetch')
 
 exports.GameStatus = league_schedule.GameStatus;
 exports.getAllLeagueSchedule = () => league_schedule.getAllLeagueScheduleJSON();
@@ -16,3 +17,5 @@ exports.getTeamDetailJSON = (teamName) => team_details.getTeamItemFromNameJSON(t
 exports.getTeamDetailUsingIdJSON = (id) => team_details.getTeamItemFromIDJSON(id);
 exports.getTopPlayersList = () => top_players.getTopPlayersList();
 exports.getTopPlayersListJSON = () => top_players.getTopPlayersListJSON();
+exports.getLatestNews = () => news_fetch.getLatestNews();
+exports.getLatestNewsJSON = () => news_fetch.getLatestNewsJSON();

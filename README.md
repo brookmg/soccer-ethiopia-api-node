@@ -55,4 +55,4 @@ soccer_et.getTopPlayersListJSON().then(topList => console.log("OBJ" , topList));
 - [x] Team details
 - [ ] Player details
 - [x] Top players list
-- [ ] News
+- [X] News
