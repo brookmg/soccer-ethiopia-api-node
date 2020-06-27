@@ -48,6 +48,14 @@ soccer_et.getTopPlayersList().then(topList => console.log("OBJ" , topList)); // 
 soccer_et.getTopPlayersListJSON().then(topList => console.log("OBJ" , topList)); // Get the top players in the league currently as json
 ```
 
+* Get the latest news from soccer ethiopia
+```javascript
+const soccer_et = require('soccer-ethiopia-api');
+
+soccer_et.getLatestNews().then(topList => console.log("OBJ" , topList)); // Get the latest news from soccer ethiopia as an array of objects
+soccer_et.getLatestNewsJSON().then(topList => console.dir(topList)); // Get the latest news from soccer ethiopia as a json
+```
+
 ## Features in this lib:
 - [x] Latest teams' standing data
 - [x] League schedule
