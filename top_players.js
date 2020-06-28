@@ -1,8 +1,8 @@
 const cheerio = require('cheerio');
-const http = require('http');
+const http = require('https');
 
 const testing = false;
-const SOCCER_ETHIOPIA_TOP_PLAYERS_URL = "http://www.soccerethiopia.net/ethpl-2012";
+const SOCCER_ETHIOPIA_TOP_PLAYERS_URL = "https://www.soccerethiopia.net/ethpl-2012";
 
 /**
  * A function to process the data from the website. The returned array of object will be similar to

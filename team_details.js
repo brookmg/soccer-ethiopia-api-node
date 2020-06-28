@@ -1,158 +1,158 @@
 const cheerio = require('cheerio');
-const http = require('http');
+const http = require('https');
 
 const testing = false;
 
 const teams = [
     {
         id: 0,
-        teamLink: 'http://www.soccerethiopia.net/football/team/ethiopia-bunna',
+        teamLink: 'https://www.soccerethiopia.net/football/team/ethiopia-bunna',
         teamName: 'ኢትዮጵያ ቡና',
-        teamLogo: 'http://www.soccerethiopia.net/wp-content/uploads/2016/02/Bunna-128x128.png',
+        teamLogo: 'https://www.soccerethiopia.net/wp-content/uploads/2016/02/Bunna-128x128.png',
         teamStartedOn: -1,
         teamCapital: ''  
     }, 
     {
         id: 1,
-        teamLink: 'http://www.soccerethiopia.net/football/team/kidus-giorgis',
+        teamLink: 'https://www.soccerethiopia.net/football/team/kidus-giorgis',
         teamName: 'ቅዱስ ጊዮርጊስ',
-        teamLogo: 'http://www.soccerethiopia.net/wp-content/uploads/2015/10/KG-128x128.png',
+        teamLogo: 'https://www.soccerethiopia.net/wp-content/uploads/2015/10/KG-128x128.png',
         teamStartedOn: -1,
         teamCapital: ''  
     }, 
     {
         id: 2,
-        teamLink: 'http://www.soccerethiopia.net/football/team/hawassa-ketema',
+        teamLink: 'https://www.soccerethiopia.net/football/team/hawassa-ketema',
         teamName: 'ሀዋሳ ከተማ',
-        teamLogo: 'http://www.soccerethiopia.net/wp-content/uploads/2016/05/Hawassa-128x128.png',
+        teamLogo: 'https://www.soccerethiopia.net/wp-content/uploads/2016/05/Hawassa-128x128.png',
         teamStartedOn: -1,
         teamCapital: ''  
     }, 
     {
         id: 3,
-        teamLink: 'http://www.soccerethiopia.net/football/team/sidama-bunna',
+        teamLink: 'https://www.soccerethiopia.net/football/team/sidama-bunna',
         teamName: 'ሲዳማ ቡና',
-        teamLogo: 'http://www.soccerethiopia.net/wp-content/uploads/2016/05/Sidama-128x128.png',
+        teamLogo: 'https://www.soccerethiopia.net/wp-content/uploads/2016/05/Sidama-128x128.png',
         teamStartedOn: -1,
         teamCapital: ''  
     }, 
     {
         id: 4,
-        teamLink: 'http://www.soccerethiopia.net/football/team/wolwalo-au',
+        teamLink: 'https://www.soccerethiopia.net/football/team/wolwalo-au',
         teamName: 'ወልዋሎ ዓ.ዩ.',
-        teamLogo: 'http://www.soccerethiopia.net/wp-content/uploads/2016/11/Welwalo-128x128.png',
+        teamLogo: 'https://www.soccerethiopia.net/wp-content/uploads/2016/11/Welwalo-128x128.png',
         teamStartedOn: -1,
         teamCapital: ''  
     }, 
     {
         id: 5,
-        teamLink: 'http://www.soccerethiopia.net/football/team/fasil-kenema',
+        teamLink: 'https://www.soccerethiopia.net/football/team/fasil-kenema',
         teamName: 'ፋሲል ከነማ',
-        teamLogo: 'http://www.soccerethiopia.net/wp-content/uploads/2016/05/Fasil-128x128.png',
+        teamLogo: 'https://www.soccerethiopia.net/wp-content/uploads/2016/05/Fasil-128x128.png',
         teamStartedOn: -1,
         teamCapital: ''  
     }, 
     {
         id: 6,
-        teamLink: 'http://www.soccerethiopia.net/football/team/bahir-dar-ketema',
+        teamLink: 'https://www.soccerethiopia.net/football/team/bahir-dar',
         teamName: 'ባህር ዳር ከተማ',
-        teamLogo: 'http://www.soccerethiopia.net/wp-content/uploads/2016/11/BDK-123x128.png',
+        teamLogo: 'https://www.soccerethiopia.net/wp-content/uploads/2016/11/BDK-123x128.png',
         teamStartedOn: -1,
         teamCapital: ''  
     }, 
     {
         id: 7,
-        teamLink: 'http://www.soccerethiopia.net/football/team/mekelle-70-enderta',
+        teamLink: 'https://www.soccerethiopia.net/football/team/mekelle-70-enderta',
         teamName: 'መቐለ 70 እንደርታ',
-        teamLogo: 'http://www.soccerethiopia.net/wp-content/uploads/2016/11/MK-105x128.png',
+        teamLogo: 'https://www.soccerethiopia.net/wp-content/uploads/2016/11/MK-105x128.png',
         teamStartedOn: -1,
         teamCapital: ''  
     }, 
     {
         id: 8,
-        teamLink: 'http://www.soccerethiopia.net/football/team/adama-ketema',
+        teamLink: 'https://www.soccerethiopia.net/football/team/adama-ketema',
         teamName: 'አዳማ ከተማ',
-        teamLogo: 'http://www.soccerethiopia.net/wp-content/uploads/2016/05/Adama-1-128x128.png',
+        teamLogo: 'https://www.soccerethiopia.net/wp-content/uploads/2016/05/Adama-1-128x128.png',
         teamStartedOn: -1,
         teamCapital: ''  
     }, 
     {
         id: 9,
-        teamLink: 'http://www.soccerethiopia.net/football/team/wolaitta-dicha',
+        teamLink: 'https://www.soccerethiopia.net/football/team/wolaitta-dicha',
         teamName: 'ወላይታ ድቻ',
-        teamLogo: 'http://www.soccerethiopia.net/wp-content/uploads/2016/05/Dicha-128x128.png',
+        teamLogo: 'https://www.soccerethiopia.net/wp-content/uploads/2016/05/Dicha-128x128.png',
         teamStartedOn: -1,
         teamCapital: ''  
     }, 
     {
         id: 10,
-        teamLink: 'http://www.soccerethiopia.net/football/team/diredawa-ketema',
+        teamLink: 'https://www.soccerethiopia.net/football/team/diredawa-ketema',
         teamName: 'ድሬዳዋ ከተማ',
-        teamLogo: 'http://www.soccerethiopia.net/wp-content/uploads/2016/05/DDK-128x128.png',
+        teamLogo: 'https://www.soccerethiopia.net/wp-content/uploads/2016/05/DDK-128x128.png',
         teamStartedOn: -1,
         teamCapital: ''  
     }, 
     {
         id: 11,
-        teamLink: 'http://www.soccerethiopia.net/football/team/mekelakeya',
+        teamLink: 'https://www.soccerethiopia.net/football/team/mekelakeya',
         teamName: 'መከላከያ',
-        teamLogo: 'http://www.soccerethiopia.net/wp-content/uploads/2016/02/Mekelakeya-128x128.png',
+        teamLogo: 'https://www.soccerethiopia.net/wp-content/uploads/2016/02/Mekelakeya-128x128.png',
         teamStartedOn: -1,
         teamCapital: ''  
     }, 
     {
         id: 12,
-        teamLink: 'http://www.soccerethiopia.net/football/team/jimma-aba-jifar',
+        teamLink: 'https://www.soccerethiopia.net/football/team/jimma-aba-jifar',
         teamName: 'ጅማ አባ ጅፋር',
-        teamLogo: 'http://www.soccerethiopia.net/wp-content/uploads/2016/11/JAJ-1-128x128.png',
+        teamLogo: 'https://www.soccerethiopia.net/wp-content/uploads/2016/11/JAJ-1-128x128.png',
         teamStartedOn: -1,
         teamCapital: ''  
     }, 
     {
         id: 13,
-        teamLink: 'http://www.soccerethiopia.net/football/team/shire-endaselassie',
+        teamLink: 'https://www.soccerethiopia.net/football/team/shire',
         teamName: 'ስሑል ሽረ',
-        teamLogo: 'http://www.soccerethiopia.net/wp-content/uploads/2016/11/Shire-128x118.png',
+        teamLogo: 'https://www.soccerethiopia.net/wp-content/uploads/2016/11/Shire-128x118.png',
         teamStartedOn: -1,
         teamCapital: ''  
     }, 
     {
         id: 14,
-        teamLink: 'http://www.soccerethiopia.net/football/team/debub-police',
+        teamLink: 'https://www.soccerethiopia.net/football/team/debub-police',
         teamName: 'ደቡብ ፖሊስ',
-        teamLogo: 'http://www.soccerethiopia.net/wp-content/uploads/2016/11/dP-125x128.png',
+        teamLogo: 'https://www.soccerethiopia.net/wp-content/uploads/2016/11/dP-125x128.png',
         teamStartedOn: -1,
         teamCapital: ''  
     }, 
     {
         id: 15,
-        teamLink: 'http://www.soccerethiopia.net/football/team/dedebit',
+        teamLink: 'https://www.soccerethiopia.net/football/team/dedebit',
         teamName: 'ደደቢት',
-        teamLogo: 'http://www.soccerethiopia.net/wp-content/uploads/2016/02/Dedebit-128x128.png',
+        teamLogo: 'https://www.soccerethiopia.net/wp-content/uploads/2016/02/Dedebit-128x128.png',
         teamStartedOn: -1,
         teamCapital: ''  
     },
     {
         id: 16,
-        teamLink: 'http://www.soccerethiopia.net/football/team/%e1%88%80%e1%8b%b5%e1%8b%ab-%e1%88%86%e1%88%b3%e1%8b%95%e1%8a%93',
+        teamLink: 'https://www.soccerethiopia.net/football/team/ሀድያ-ሆሳዕና',
         teamName: 'ሀዲያ ሆሳዕና',
-        teamLogo: 'http://www.soccerethiopia.net/wp-content/uploads/2016/11/24483-128x128.png',
+        teamLogo: 'https://www.soccerethiopia.net/wp-content/uploads/2016/11/24483-128x128.png',
         teamStartedOn: -1,
         teamCapital: ''
     },
     {
         id: 17,
-        teamLink: 'http://www.soccerethiopia.net/football/team/sebeta',
+        teamLink: 'https://www.soccerethiopia.net/football/team/sebeta',
         teamName: 'ሰበታ ከተማ',
-        teamLogo: 'http://www.soccerethiopia.net/wp-content/uploads/2016/11/sebeta.png',
+        teamLogo: 'https://www.soccerethiopia.net/wp-content/uploads/2016/11/sebeta.png',
         teamStartedOn: -1,
         teamCapital: ''
     },
     {
         id: 18,
-        teamLink: 'http://www.soccerethiopia.net/football/team/%e1%8b%88%e1%88%8d%e1%89%82%e1%8c%a4-%e1%8a%a8%e1%89%b0%e1%88%9b',
+        teamLink: 'https://www.soccerethiopia.net/football/team/ወልቂጤ-ከተማ',
         teamName: 'ወልቂጤ ከተማ',
-        teamLogo: 'http://www.soccerethiopia.net/wp-content/uploads/2016/11/sebeta.png',
+        teamLogo: 'https://www.soccerethiopia.net/wp-content/uploads/2016/11/sebeta.png',
         teamStartedOn: -1,
         teamCapital: ''
     }
@@ -258,12 +258,15 @@ function extractDataFromTableData(tableData, incompleteTeamItem) {
 
 function processTeamDetailFromResponse(response, incompleteTeamItem) {
     let $ = cheerio.load(response);
-    let possibleCandidates = $('.tablepress-id-006');
+    let possibleCandidates = $('#tablepress-006');
     let actualTable = null;
 
     for (let i = 0; i < possibleCandidates.length; i++) {
         let tempBlock = cheerio.load(possibleCandidates[i]);
-        if (cheerio.load(tempBlock('tr')[0]).text() === '\nፕሮፋይል\n') {
+        if (
+            cheerio.load(tempBlock('tr')[0]).text() === 'ፕሮፋይል' || 
+            cheerio.load(tempBlock('tr')[0]).text() === '\nፕሮፋይል\n'
+            ) {
             actualTable = cheerio.load(possibleCandidates[i]);
             break;
         }
@@ -296,9 +299,9 @@ function replaceCharFromString(mainString, characterToReplace) {
  * <pre>
  *   { 
  *       id: 0,
- *       teamLink: 'http://www.soccerethiopia.net/football/team/ethiopia-bunna',
+ *       teamLink: 'https://www.soccerethiopia.net/football/team/ethiopia-bunna',
  *       teamName: 'ኢትዮጵያ ቡና',
- *       teamLogo: 'http://www.soccerethiopia.net/wp-content/uploads/2016/02/Bunna-128x128.png',
+ *       teamLogo: 'https://www.soccerethiopia.net/wp-content/uploads/2016/02/Bunna-128x128.png',
  *       teamStartedOn: 1968,
  *       teamCapital: 'አዲስ አበባ',
  *       teamFullName: 'ኢትዮጵያ ቡና ስፖርት ክለብ',
@@ -322,7 +325,7 @@ function replaceCharFromString(mainString, characterToReplace) {
 
 exports.getTeamItemFromId = async function(id) {
     return getTeamDetailFromWeb(teams[id])
-        .then(data => processTeamDetailFromResponse(data))
+        .then(data => processTeamDetailFromResponse(data, teams[id]))
         .catch(err => console.log(err));
 };
 
@@ -333,9 +336,9 @@ exports.getTeamItemFromId = async function(id) {
  * <pre>
  *   { 
  *       id: 0,
- *       teamLink: 'http://www.soccerethiopia.net/football/team/ethiopia-bunna',
+ *       teamLink: 'https://www.soccerethiopia.net/football/team/ethiopia-bunna',
  *       teamName: 'ኢትዮጵያ ቡና',
- *       teamLogo: 'http://www.soccerethiopia.net/wp-content/uploads/2016/02/Bunna-128x128.png',
+ *       teamLogo: 'https://www.soccerethiopia.net/wp-content/uploads/2016/02/Bunna-128x128.png',
  *       teamStartedOn: 1968,
  *       teamCapital: 'አዲስ አበባ',
  *       teamFullName: 'ኢትዮጵያ ቡና ስፖርት ክለብ',

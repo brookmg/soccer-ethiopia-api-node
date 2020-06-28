@@ -1,8 +1,8 @@
 const cheerio = require('cheerio');
-const http = require('http');
+const http = require('https');
 
 const testing = false;
-const SOCCER_ETHIOPIA_LEAGUE_SCHEDULE_URL = "http://www.soccerethiopia.net/ethpl-2012";
+const SOCCER_ETHIOPIA_LEAGUE_SCHEDULE_URL = "https://www.soccerethiopia.net/ethpl-2012";
 const GameStatus = {STATUS_TOOK_PLACE: 0, STATUS_CANCELLED: 1, STATUS_POSTPONED: 2, STATUS_NORMAL: 3};
 exports.GameStatus = GameStatus;
 

@@ -1,15 +1,15 @@
 const cheerio = require('cheerio');
-const http = require('http');
+const http = require('https');
 
 const testing = false;
-const SOCCER_ETHIOPIA_CLUB_STANDING_URL = "http://www.soccerethiopia.net/football/table/2012-standing";
+const SOCCER_ETHIOPIA_CLUB_STANDING_URL = "https://www.soccerethiopia.net/football/table/2012-standing";
 
 /**
  * A function to process the data from the website. The returned array of object will be similar to
  * <pre>
  * [{
  *      team_name: 'ኢትዮጵያ ቡና',
- *      team_logo: 'http://www.soccerethiopia.net/wp-content/uploads/2016/02/Bunna-128x128.png',
+ *      team_logo: 'https://www.soccerethiopia.net/wp-content/uploads/2016/02/Bunna-128x128.png',
  *      rank: '3',
  *      played: '6',
  *      won: '3',
